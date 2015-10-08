@@ -11,16 +11,18 @@ LoadAndCleanData <- function() {
     dat <- subset(dat, as.Date(datetime) >= as.Date("2007-02-01"))
     dat <- subset(dat, as.Date(datetime) <= as.Date("2007-02-02"))
     
-    dat
+    return(dat)
 }
 
 producePlot2 <- function(dat) {
+    png(file="plot2.png", width = 480, height = 480)
     yAxisText <- "Global Active Power (kilowatts)"
     
     with(dat, {
         plot(datetime, Global_active_power, xlab="", ylab=yAxisText, type="n")
         lines(datetime, Global_active_power)
     })
+    dev.off()
 }
 
 #Run script.

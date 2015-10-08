@@ -11,12 +11,12 @@ LoadAndCleanData <- function() {
     dat <- subset(dat, as.Date(datetime) >= as.Date("2007-02-01"))
     dat <- subset(dat, as.Date(datetime) <= as.Date("2007-02-02"))
     
-    dat
+    return(dat)
 }
 
 producePlot4 <- function(dat) {
-    #Produce 2 by 2 plot
-    tmp <- producePlot3(dat)
+    png(file="plot4.png", width = 480, height = 480)
+    #Produce 2 by 2 plot, using single plots where possible
     par(mfrow = c(2,2), oma=c(2,0,0,0))
     
     #top-left plot
@@ -40,8 +40,13 @@ producePlot4 <- function(dat) {
         lines(datetime, Sub_metering_3, col="blue")
     })
     
+    cols = c("black", "red", "blue")
+    legends = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
+    legend("topright", col = cols, lty=1, lwd=2, bty="n", legend = legends)
+    
     #bottom-right plot
     with(dat, plot(datetime, Global_reactive_power, type="l"))
+    dev.off()
 }
 
 #Run script.

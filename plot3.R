@@ -11,10 +11,11 @@ LoadAndCleanData <- function() {
     dat <- subset(dat, as.Date(datetime) >= as.Date("2007-02-01"))
     dat <- subset(dat, as.Date(datetime) <= as.Date("2007-02-02"))
     
-    dat
+    return(dat)
 }
 
 producePlot3 <- function(dat) {
+    png(file="plot3.png", width = 480, height = 480)
     yAxisText <- "Energy sub metering"
     
     with(dat, {
@@ -25,8 +26,9 @@ producePlot3 <- function(dat) {
         
         cols = c("black", "red", "blue")
         legends = c("Sub_metering_1", "Sub_metering_2", "Sub_metering_3")
-        legend("topright", col = cols, lty=1, legend = legends)
-    }) 
+        legend("topright", col = cols, lty=1, lwd=2, legend = legends)
+    })
+    dev.off()
 }
 
 #Run script.
